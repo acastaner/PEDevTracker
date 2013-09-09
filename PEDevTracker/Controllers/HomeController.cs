@@ -65,11 +65,6 @@ namespace PEDevTracker.Controllers
             devs.Add(darren);            
             devs.Add(guildmaster);
             devs.Add(sawyer);            
-
-            foreach (Developer dev in devs)
-            {
-                dev.FetchPostsFromRemote();
-            }  
         }
     }
 }
