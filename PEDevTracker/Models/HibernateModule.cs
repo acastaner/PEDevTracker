@@ -130,8 +130,8 @@ namespace PEDevTracker.Models
         {
             // this NHibernate tool takes a configuration (with mapping info in)
             // and exports a database schema from it
-            new SchemaExport(config)
-              .Create(false, true);
+            new SchemaUpdate(config)
+                .Execute(false, true);
         }
         #endregion
     }
