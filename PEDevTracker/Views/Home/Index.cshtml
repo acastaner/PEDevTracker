@@ -10,7 +10,7 @@
     <p>~~~~~~</p>
     <div>
         <div class="row">
-            Posted by <a href="@devPost.Author.GetProfileUri()" target="_blank">@devPost.Author.DisplayName</a> on @devPost.Date
+            Posted by <a href="@devPost.Author.GetProfileUri()" target="_blank">@devPost.Author.DisplayName</a> on @devPost.Date.ToShortDateString() @devPost.Date.ToShortTimeString()
         </div>
         <div class="row">
             <span class="dev-post-quote-text">@Html.Raw(devPost.Content)</span>
