@@ -14,6 +14,9 @@ namespace PEDevTracker.Controllers
     {
         public ActionResult Index()
         {
+
+            InitiateData();
+
             string url = "http://forums.obsidian.net/user/18301-badler/?tab=posts";
 
             string content;
@@ -44,7 +47,7 @@ namespace PEDevTracker.Controllers
                 foreach (HtmlNode postNode in allPosts)
                 {
                     DevPost newPost = new DevPost();
-                    newPost.Author = "BAdler";
+                    newPost.Author = new Developer("18301-badler", "BAddler", "Some Dude"); 
                     newPost.ImportPost(postNode);                    
                     devPosts.Add(newPost);
                 }                
@@ -67,6 +70,23 @@ namespace PEDevTracker.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public void InitiateData()
+        {
+            var s = HibernateModule.CreateSession();
+            var t = s.BeginTransaction();
+
+            Developer badler = new Developer("18301-badler", "BAdler", "");
+            Developer adam = new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke");
+            Developer darren = new Developer("6-darren-monahan", "Darren Monahan", "Darren Monahan");
+            Developer sawyer = new Developer("24-je-sawyer", "J.E. Sawyer", "J.E. Sawyer");
+            s.Save(adam);
+            s.Save(darren);
+            s.Save(badler);
+            s.Save(sawyer);
+
+            t.Commit();
         }
     }
 }

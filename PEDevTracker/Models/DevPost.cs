@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using HtmlAgilityPack;
+using FluentNHibernate.Mapping;
 
 namespace PEDevTracker.Models
 {
+    #region DevPost class
     public class DevPost
     {
+        #region Attributes
         public virtual int Id { get; set; }
         public virtual DateTime Date { get; set; }
         public virtual DateTime RetrieveDate { get; set; }
-        public virtual string Author { get; set; }
+        public virtual Developer Author { get; set; }
         public virtual string Content { get; set; }
         public virtual Uri Uri { get; set; }
-
+        #endregion
+        #region Constructors
         public DevPost()
         {
             this.RetrieveDate = DateTime.Now;
         }
-
+        #endregion
+        #region Methods
         /// <summary>
         ///  Parses the provided HtmlNode containing the developer's post and set the properties of the object appropriately.
         /// </summary>
         /// <param name="postNode"></param>
-        public void ImportPost(HtmlNode postNode)
+        public virtual void ImportPost(HtmlNode postNode)
         {
             SetOriginalPostUri(postNode);
             SetTime(postNode);
@@ -49,6 +54,7 @@ namespace PEDevTracker.Models
             string postTime = postNode.SelectSingleNode(".//p[@class='posted_info']").InnerText;
             postTime = postTime.Replace("\t", "");
             postTime = postTime.Replace("\n", "");
+            // TODO: Parse time
         }
 
         /// <summary>
@@ -59,5 +65,22 @@ namespace PEDevTracker.Models
         {
             this.Content = postNode.SelectSingleNode(".//div[@class='post']").InnerHtml;
         }
+        #endregion
     }
+    #endregion
+    #region Fluent NHibernate Mappings
+    public class DevPostMap : ClassMap<DevPost>
+    {
+        public DevPostMap()
+        {
+            Table("pedt_DevPost"); 
+            Id(x => x.Id);
+            Map(x => x.Date);
+            Map(x => x.RetrieveDate);
+            References(x => x.Author);
+            Map(x => x.Content);
+            Map(x => x.Uri);
+        }
+    }
+    #endregion
 }
