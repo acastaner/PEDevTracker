@@ -15,8 +15,6 @@ namespace PEDevTracker.Controllers
         public ActionResult Index()
         {
             var fluentConfig = HibernateModule.GetConfiguration();
-            InitiateData();
-
             var s = HibernateModule.CreateSession();
             IList<DevPost> latestDevPosts = s.QueryOver<DevPost>()
                                 .OrderBy(x => x.Date).Desc
@@ -42,29 +40,5 @@ namespace PEDevTracker.Controllers
             return View();
         }
 
-        public void InitiateData()
-        {
-            var s = HibernateModule.CreateSession();
-            var t = s.BeginTransaction();
-
-            Developer badler = new Developer("18301-badler", "BAdler", "");
-            Developer adam = new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke");
-            Developer darren = new Developer("6-darren-monahan", "Darren Monahan", "Darren Monahan");
-            Developer sawyer = new Developer("24-je-sawyer", "J.E. Sawyer", "Joshua Eric Sawyer");
-            Developer guildmaster = new Developer("1-the-guildmaster", "The Guildmaster", "");
-            s.Save(adam);
-            s.Save(badler);
-            s.Save(darren);
-            s.Save(guildmaster);
-            s.Save(sawyer);
-            t.Commit();
-
-            List<Developer> devs = new List<Developer>();
-            devs.Add(adam);
-            devs.Add(badler);
-            devs.Add(darren);            
-            devs.Add(guildmaster);
-            devs.Add(sawyer);            
-        }
     }
 }
