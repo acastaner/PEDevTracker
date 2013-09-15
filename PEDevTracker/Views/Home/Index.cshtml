@@ -7,17 +7,7 @@
 
 @foreach (PEDevTracker.Models.DevPost devPost in Model)
 {
-    <p>~~~~~~</p>
-    <div>
-        <div class="row">
-            Posted by <a href="@devPost.Author.GetProfileUri()" target="_blank">@devPost.Author.DisplayName</a> on @devPost.Date.ToShortDateString() @devPost.Date.ToShortTimeString()
-        </div>
-        <div class="row">
-            <span class="dev-post-quote-text">@Html.Raw(devPost.Content)</span>
-        </div>
-        <div class="row">
-            Retrieved on: @devPost.RetrieveDate.ToShortDateString() at @devPost.RetrieveDate.ToShortTimeString()
-            <a href="@devPost.Uri" target="_blank">Source</a> | <a href="#">Permalink</a>
-        </div>
-    </div>
+    // We use a partial view that can be used in other places while retaining a consistent look
+    // This one is stored under /Views/_Shared/_DevPost.cshtml
+    Html.RenderPartial("_DevPost", devPost);
 }

@@ -14,7 +14,31 @@ namespace PEDevTracker.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var s = HibernateModule.CreateSession();
+            IList<Developer> devs = s.QueryOver<Developer>()
+                                    .OrderBy(x => x.DisplayName).Asc
+                                    .List<Developer>();                              
+            return View(devs);
+        }
+
+        public ActionResult View(int id)
+        {
+            var s = HibernateModule.CreateSession();
+            Developer dev = new Developer();
+
+            try
+            {
+                dev = s.QueryOver<Developer>()
+                                .Where(x => x.Id == id)
+                                .Take(1)
+                                .List<Developer>().First();
+            }
+            catch
+            {
+                throw new Exception("Could not find that developer. You either found a bug or trying to catch land sharks.");
+            }
+
+            return View(dev);
         }
 
         /// <summary>

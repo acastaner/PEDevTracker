@@ -96,6 +96,13 @@ namespace PEDevTracker.Models
             }
             return devPosts;
         }
+        public virtual int GetPostCount()
+        {
+            var s = HibernateModule.CreateSession();
+            return s.QueryOver<DevPost>()
+                            .Where(x => x.Author == this)
+                            .RowCount();
+        }
         #endregion
     }
     #endregion
