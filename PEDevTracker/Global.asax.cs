@@ -1,4 +1,5 @@
-﻿using PEDevTracker.Controllers;
+﻿using PEDevTracker.App_Start;
+using PEDevTracker.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace PEDevTracker
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BootstrapBundleConfig.RegisterBundles();
             AuthConfig.RegisterAuth();
             DeveloperController.InitiateAccounts();
         }
