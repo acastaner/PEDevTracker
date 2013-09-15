@@ -1,11 +1,11 @@
-﻿@model List<PEDevTracker.Models.DevPost>
+﻿@model List<PEDevTracker.Models.Post>
 @{
     ViewBag.Title = "Project Eternity Dev Tracker";
     
 }
 <h3>Latest Developers Posts</h3>
 
-@foreach (PEDevTracker.Models.DevPost devPost in Model)
+@foreach (PEDevTracker.Models.Post devPost in Model)
 {
     // We use a partial view that can be used in other places while retaining a consistent look
     // This one is stored under /Views/_Shared/_DevPost.cshtml

@@ -1,4 +1,4 @@
-﻿@model PEDevTracker.Models.DevPost
+﻿@model PEDevTracker.Models.Post
 <p>~~~~~~</p>
     <div>
         <div class="row">
@@ -9,6 +9,6 @@
         </div>
         <div class="row">
             Retrieved on: @Model.RetrieveDate.ToShortDateString() at @Model.RetrieveDate.ToShortTimeString()
-            <a href="@Model.Uri" target="_blank">Source</a> | <a href="#">Permalink</a>
+            <a href="@Model.Uri" target="_blank">Source</a> | @Html.ActionLink("Permalink", "View", new{Controller="Post", id=Model.Id})
         </div>
     </div>

@@ -45,14 +45,14 @@ namespace PEDevTracker.Models
         /// Fetches all the posts by this user from the local database (ie: not the official forums)
         /// </summary>
         /// <returns></returns>
-        public virtual IList<DevPost> FetchPostsFromLocal(int amount)
+        public virtual IList<Post> FetchPostsFromLocal(int amount)
         {
             var s = HibernateModule.CreateSession();
-            IList<DevPost> posts = s.QueryOver<DevPost>()
+            IList<Post> posts = s.QueryOver<Post>()
                                     .Where(x => x.Author == this)
                                     .OrderBy(x => x.Date).Desc
                                     .Take(amount)
-                                    .List<DevPost>();
+                                    .List<Post>();
 
             return posts;
         }
@@ -60,7 +60,7 @@ namespace PEDevTracker.Models
         /// Fetches all the posts by this developer from remote (ie: from the official forums)
         /// </summary>
         /// <returns></returns>
-        public virtual IEnumerable<DevPost> FetchPostsFromRemote()
+        public virtual IEnumerable<Post> FetchPostsFromRemote()
         {
             string content;
             // Retrieve web page
@@ -77,7 +77,7 @@ namespace PEDevTracker.Models
             doc.LoadHtml(content);
             HtmlNode mainNode = doc.GetElementbyId("profile_panes_wrap");
 
-            List<DevPost> devPosts = new List<DevPost>();
+            List<Post> devPosts = new List<Post>();
 
             // If we found some data, store each post as a different node (we will need to parse the nodes some more)
             if (mainNode != null)
@@ -88,7 +88,7 @@ namespace PEDevTracker.Models
                 // Further parse each post to extract thread link, post time, etc..
                 foreach (HtmlNode postNode in allPosts)
                 {
-                    DevPost newPost = new DevPost();
+                    Post newPost = new Post();
                     newPost.Author = this;
                     newPost.ImportPost(postNode);
                     devPosts.Add(newPost);
@@ -99,7 +99,7 @@ namespace PEDevTracker.Models
         public virtual int GetPostCount()
         {
             var s = HibernateModule.CreateSession();
-            return s.QueryOver<DevPost>()
+            return s.QueryOver<Post>()
                             .Where(x => x.Author == this)
                             .RowCount();
         }

@@ -16,10 +16,10 @@ namespace PEDevTracker.Controllers
         {
             var fluentConfig = HibernateModule.GetConfiguration();
             var s = HibernateModule.CreateSession();
-            IList<DevPost> latestDevPosts = s.QueryOver<DevPost>()
+            IList<Post> latestDevPosts = s.QueryOver<Post>()
                                 .OrderBy(x => x.Date).Desc
                                 .Take(100)
-                                .List<DevPost>();
+                                .List<Post>();
 
             ViewBag.Message = "Tracking the developers of Project: Eternity.";
             return View(latestDevPosts);  
