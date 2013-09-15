@@ -23,8 +23,9 @@ namespace PEDevTracker.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            /*ViewBag.ReturnUrl = returnUrl;
+            return View();*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -35,14 +36,15 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            /*if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
 
             // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "The user name or password provided is incorrect.");
-            return View(model);
+            return View(model);*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -52,8 +54,9 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            /*WebSecurity.Logout();
 
+            return RedirectToAction("Index", "Home");*/
             return RedirectToAction("Index", "Home");
         }
 
@@ -63,7 +66,8 @@ namespace PEDevTracker.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            //return View();
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -74,7 +78,7 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
@@ -90,7 +94,8 @@ namespace PEDevTracker.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(model);*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -100,7 +105,7 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
+            /*string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
             ManageMessageId? message = null;
 
             // Only disassociate the account if the currently logged in user is the owner
@@ -119,7 +124,8 @@ namespace PEDevTracker.Controllers
                 }
             }
 
-            return RedirectToAction("Manage", new { Message = message });
+            return RedirectToAction("Manage", new { Message = message });*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -127,14 +133,15 @@ namespace PEDevTracker.Controllers
 
         public ActionResult Manage(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            /*ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            return View();*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -144,7 +151,7 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            /*bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
             if (hasLocalAccount)
@@ -197,7 +204,8 @@ namespace PEDevTracker.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(model);*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -208,7 +216,8 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            //return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -217,7 +226,7 @@ namespace PEDevTracker.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            /*AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
             if (!result.IsSuccessful)
             {
                 return RedirectToAction("ExternalLoginFailure");
@@ -241,7 +250,8 @@ namespace PEDevTracker.Controllers
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
                 return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-            }
+            }*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -252,7 +262,7 @@ namespace PEDevTracker.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
+            /*string provider = null;
             string providerUserId = null;
 
             if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
@@ -287,7 +297,8 @@ namespace PEDevTracker.Controllers
 
             ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
             ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            return View(model);*/
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -296,21 +307,23 @@ namespace PEDevTracker.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
-            return View();
+            //return View();
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
         [ChildActionOnly]
         public ActionResult ExternalLoginsList(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+            /*ViewBag.ReturnUrl = returnUrl;
+            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);*/
+            return RedirectToAction("Index", "Home");
         }
 
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            /*ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
             List<ExternalLogin> externalLogins = new List<ExternalLogin>();
             foreach (OAuthAccount account in accounts)
             {
@@ -325,20 +338,22 @@ namespace PEDevTracker.Controllers
             }
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-            return PartialView("_RemoveExternalLoginsPartial", externalLogins);
+            return PartialView("_RemoveExternalLoginsPartial", externalLogins);*/
+            return RedirectToAction("Index", "Home");
         }
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            /*if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
             else
             {
                 return RedirectToAction("Index", "Home");
-            }
+            }*/
+            return RedirectToAction("Index", "Home");
         }
 
         public enum ManageMessageId

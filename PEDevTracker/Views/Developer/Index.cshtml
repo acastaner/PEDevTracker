@@ -1,0 +1,16 @@
+﻿@model List<PEDevTracker.Models.Developer>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Developers</h2>
+<div>Here's the list of the developers we are tracking. Click on their name to see all of their posts. If you feel some are missing, please contact us.</div>
+<div>
+    <ul>
+    @foreach (PEDevTracker.Models.Developer dev in Model)
+    {
+        <li>@Html.ActionLink(dev.DisplayName, "View", new { id=dev.Id })</li>
+    }
+    </ul>
+</div>
