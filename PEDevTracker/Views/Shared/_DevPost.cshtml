@@ -2,7 +2,7 @@
 <p>~~~~~~</p>
     <div>
         <div class="row">
-            Posted by <a href="@Model.Author.GetProfileUri()" target="_blank">@Model.Author.DisplayName</a> on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
+            Posted by @Html.ActionLink(Model.Author.DisplayName, "View", new{ Controller="Developer", id=Model.Author.Id}) on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
         </div>
         <div class="row">
             <span class="dev-post-quote-text">@Html.Raw(Model.Content)</span>

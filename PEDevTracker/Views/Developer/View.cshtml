@@ -1,6 +1,6 @@
 ﻿@model PEDevTracker.Models.Developer
 @{
-    ViewBag.Title = "View" + Model.DisplayName + " profile";
+    ViewBag.Title = "View " + Model.DisplayName + " profile";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
     IList<PEDevTracker.Models.DevPost> posts = Model.FetchPostsFromLocal(50);
 }
