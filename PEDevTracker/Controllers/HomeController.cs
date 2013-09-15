@@ -22,8 +22,7 @@ namespace PEDevTracker.Controllers
                                 .List<DevPost>();
 
             ViewBag.Message = "Tracking the developers of Project: Eternity.";
-            return View(latestDevPosts);                       
-
+            return View(latestDevPosts);  
         }
 
         public ActionResult About()
