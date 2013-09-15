@@ -4,6 +4,8 @@
 <head>
     @Styles.Render("~/Content/bootstrap/base")
     @Styles.Render("~/Content/bootstrap/theme")
+    @* Google Analytics code, can be placed anywhere, here is fine *@
+    @{Html.RenderPartial("_GoogleAnalytics");}
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>

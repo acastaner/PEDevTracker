@@ -79,7 +79,7 @@ namespace PEDevTracker.Models
                     .ConnectionString(c =>
                         c.FromConnectionStringWithKey("PEDTConnString"))
                     .ShowSql())
-                        .Mappings(m => m.FluentMappings.AddFromAssemblyOf<DevPost>()/*.ExportTo(@"C:\Users\Sidoine\Documents\GitHub\Folke\Folke\temp_images")*/)
+                        .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Post>()/*.ExportTo(@"C:\Users\Sidoine\Documents\GitHub\Folke\Folke\temp_images")*/)
                     .ExposeConfiguration(BuildSchema);
             }
             return configuration;

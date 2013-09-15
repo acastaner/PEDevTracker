@@ -213,6 +213,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DeveloperController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SyncController.cs" />
     <Compile Include="Models\HibernateModule.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,7 +223,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Developer.cs" />
-    <Compile Include="Models\DevPost.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +301,8 @@
     <Content Include="Views\Developer\Index.cshtml" />
     <Content Include="Views\Developer\View.cshtml" />
     <Content Include="Views\Shared\_DevPost.cshtml" />
+    <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
+    <Content Include="Views\Post\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
