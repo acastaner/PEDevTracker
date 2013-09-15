@@ -18,15 +18,15 @@ namespace PEDevTracker
             //    clientId: "",
             //    clientSecret: "");
 
-            OAuthWebSecurity.RegisterTwitterClient(
-                consumerKey: "VCr3LxJ3QONRW0kijvUWog",
-                consumerSecret: "Mm5sXg9rRpdtBDKH9qR2e97rYwNrcXe09LrOomNdhbQ");
+            /*OAuthWebSecurity.RegisterTwitterClient(
+                consumerKey: "",
+                consumerSecret: "");
 
             OAuthWebSecurity.RegisterFacebookClient(
-                appId: "238740206274804",
-                appSecret: "577a3ebe61875475f4e951ec080b9cd3");
+                appId: "",
+                appSecret: "");
 
-            OAuthWebSecurity.RegisterGoogleClient();
+            OAuthWebSecurity.RegisterGoogleClient();*/
         }
     }
 }
