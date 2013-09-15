@@ -1,14 +1,14 @@
-﻿@model PEDevTracker.Models.DevPost
+﻿@model PEDevTracker.Models.Post
 <p>~~~~~~</p>
     <div>
         <div class="row">
-            Posted by <a href="@Model.Author.GetProfileUri()" target="_blank">@Model.Author.DisplayName</a> on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
+            Posted by @Html.ActionLink(Model.Author.DisplayName, "View", new{ Controller="Developer", id=Model.Author.Id}) on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
         </div>
         <div class="row">
             <span class="dev-post-quote-text">@Html.Raw(Model.Content)</span>
         </div>
         <div class="row">
             Retrieved on: @Model.RetrieveDate.ToShortDateString() at @Model.RetrieveDate.ToShortTimeString()
-            <a href="@Model.Uri" target="_blank">Source</a> | <a href="#">Permalink</a>
+            <a href="@Model.Uri" target="_blank">Source</a> | @Html.ActionLink("Permalink", "View", new{Controller="Post", id=Model.Id})
         </div>
     </div>

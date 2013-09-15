@@ -10,8 +10,8 @@ using System.Globalization;
 
 namespace PEDevTracker.Models
 {
-    #region DevPost class
-    public class DevPost
+    #region Post class
+    public class Post
     {
         #region Attributes
         public virtual int Id { get; set; }
@@ -23,7 +23,7 @@ namespace PEDevTracker.Models
         public virtual string ContentHash { get; set; }
         #endregion
         #region Constructors
-        public DevPost()
+        public Post()
         {
             this.RetrieveDate = DateTime.Now;
         }
@@ -62,10 +62,10 @@ namespace PEDevTracker.Models
         public virtual bool PostExists()
         {
             var s = HibernateModule.CreateSession();
-            var matchingHash = s.QueryOver<DevPost>()
+            var matchingHash = s.QueryOver<Post>()
                                 .Where(x => x.ContentHash == this.ContentHash)
                                 .OrderBy(x => x.RetrieveDate).Desc
-                                .SingleOrDefault<DevPost>();
+                                .SingleOrDefault<Post>();
 
             bool exists = (matchingHash == null) ? false : true;
             return exists;
@@ -190,7 +190,7 @@ namespace PEDevTracker.Models
     }
     #endregion
     #region Fluent NHibernate Mappings
-    public class DevPostMap : ClassMap<DevPost>
+    public class DevPostMap : ClassMap<Post>
     {
         public DevPostMap()
         {

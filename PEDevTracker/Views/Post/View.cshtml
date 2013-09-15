@@ -1,0 +1,24 @@
+﻿@model PEDevTracker.Models.Post
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+    bool error = false;
+    
+    if(Model == null)
+    {
+        error = true;    
+    }
+}
+
+<h2>View post</h2>
+@if (error)
+{
+    <div class="alert-message error">
+        <a class="close" href="#">x</a>
+        <p>Could not find that post. Whoever gave you that link is a bad person.</p>
+    </div>
+}
+else
+{
+    @Html.Partial("_DevPost", Model)
+}

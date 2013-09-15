@@ -1,8 +1,8 @@
 ﻿@model PEDevTracker.Models.Developer
 @{
-    ViewBag.Title = "View" + Model.DisplayName + " profile";
+    ViewBag.Title = "View " + Model.DisplayName + " profile";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
-    IList<PEDevTracker.Models.DevPost> posts = Model.FetchPostsFromLocal(50);
+    IList<PEDevTracker.Models.Post> posts = Model.FetchPostsFromLocal(50);
 }
 
 <h2>@Model.DisplayName</h2>
@@ -11,7 +11,7 @@
 </div>
 <h2>Posts</h2>
 <div>
-    @foreach (PEDevTracker.Models.DevPost post in posts)
+    @foreach (PEDevTracker.Models.Post post in posts)
     {
         Html.RenderPartial("_DevPost", post);
     }
