@@ -1,5 +1,4 @@
 ﻿html {
-    background: url(images/background-2560.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -8,9 +7,15 @@
     padding: 0;
 }
 
+@media (min-width: 768px) {
+    html {
+        background: url(images/background-2560.jpg) center center fixed;
+    }
+}
+
 @media (max-width: 768px) {
     html {
-        background: url(images/background-1280.jpg) no-repeat center center fixed;
+        background: url(images/background-1280.jpg) center center fixed;
     }
 }
 
@@ -113,7 +118,7 @@ hr {
 /* Dev Post */
 
 .dev_post {
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .3);
     margin-bottom: 10px;
     border-radius: 10px;
 }
@@ -144,7 +149,7 @@ hr {
     }
 
 .content_body {    
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .3);
     margin-bottom: 10px;
     border-radius: 10px;
 }
