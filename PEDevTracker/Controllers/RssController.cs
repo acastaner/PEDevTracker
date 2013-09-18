@@ -1,6 +1,8 @@
-﻿using System;
+﻿using PEDevTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Web;
 using System.Web.Mvc;
 
@@ -14,6 +16,32 @@ namespace PEDevTracker.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public RssActionResult Feed()
+        {
+            var s = HibernateModule.CreateSession();
+            var t = s.BeginTransaction();
+
+            var query = s.QueryOver<Post>()
+                        .OrderBy(a => a.Date).Desc
+                        .Take(10)
+                        .List();
+
+            List<SyndicationItem> items = new List<SyndicationItem>();
+            
+            string hostName = "http://pedevtracker.azurewebsites.net";
+            foreach (Post a in query)
+            {
+                string url = hostName + "/Post/Details/"+ a.Id;
+                SyndicationItem item = new SyndicationItem("Dev post by " + a.Author.DisplayName, a.Content, new Uri(url));
+                item.PublishDate = a.Date;
+                item.LastUpdatedTime = a.RetrieveDate;
+                item.Id = a.Id.ToString();
+                items.Add(item);
+            }
+            var feed = new SyndicationFeed("Project Eternity Dev Tracker", "Awkwardly tracking devs since 2013", new Uri(hostName), items);
+            return new RssActionResult(new Rss20FeedFormatter(feed));
         }
 
         //
