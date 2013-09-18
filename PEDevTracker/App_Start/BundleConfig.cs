@@ -19,7 +19,7 @@ namespace PEDevTracker
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
-                        "~/Content/scripts/Layout.js"));
+                        "~/Scripts/Layout.js"));
 
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
