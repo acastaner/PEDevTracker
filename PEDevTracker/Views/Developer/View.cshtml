@@ -5,7 +5,7 @@
     IList<PEDevTracker.Models.Post> posts = Model.FetchPostsFromLocal(50);
 }
 
-<h2>@Model.DisplayName</h2>
+<h3>@Model.DisplayName</h3>
 <div>The profile page of @Model.DisplayName is located there: <a href="@Model.GetProfileUri().ToString()" target="_blank">@Model.GetProfileUri().ToString()</a>. 
     We retrieved a total of <b>@Model.GetPostCount().ToString() posts</b> from this person.
 </div>

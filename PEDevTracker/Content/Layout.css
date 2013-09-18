@@ -1,0 +1,154 @@
+﻿html {
+    background: url(images/background-2560.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    html {
+        background: url(images/background-1280.jpg) no-repeat center center fixed;
+    }
+}
+
+body, blockquote, p {
+    font-family: "Segoe UI", Verdana, Helvetica, Arial, Sans-Serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+p {
+    padding-bottom: 10px;
+}
+
+h1 {
+    font-family: 'IM Fell DW Pica', serif;
+    -webkit-text-stroke: .2px; /* goddamnit Chrome fix your shit */
+    color: white;
+    font-size: 40px;
+}
+
+h2 {
+    font-family: 'IM Fell DW Pica SC', serif;
+    -webkit-text-stroke: .2px; /* goddamnit Chrome fix your shit */
+    color: white;
+    font-size: 36px;
+}
+
+h3 {
+    font-family: 'IM Fell DW Pica', serif;
+    -webkit-text-stroke: .2px; /* goddamnit Chrome fix your shit */
+    color: white;
+    font-size: 28px;
+    padding-bottom: 10px;
+}
+
+hr {
+    color: white;
+}
+
+.col-md-4 {
+    text-align: center;
+    min-width: 350px;
+}
+
+.col-md-8 {
+    text-align: center;
+}
+
+#left-col {
+    text-align: left;
+    position: fixed;
+}
+
+@media (max-width: 1200px) {
+    #left-col {
+        position: inherit;
+    }
+}
+
+#right-col {
+    text-align: left;
+}
+
+
+/* Logo Adjustments */
+
+#title {
+}
+
+#subtitle {    
+    margin-top: -22px;
+    margin-left: 95px;
+}
+
+#logo-line1 {
+    width: 80px;
+    margin-left: 0px;
+    text-align: left;
+    margin-top: -25px;    
+}
+
+#logo-line2 {
+    width: 24px;
+    margin-top: -23px;
+    margin-left: 282px;
+    text-align: left;
+}
+
+.nav {
+    font-family: 'IM Fell DW Pica', serif;
+    font-style: italic;
+    -webkit-text-stroke: .1px; /* goddamnit Chrome fix your shit */
+    color: white;
+    font-size: 16px;
+    display:block;
+}
+
+/* Dev Post */
+
+.dev_post {
+    background-color: rgba(0, 0, 0, .2);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+    .dev_post div {
+    }
+
+    .dev_postby, .dev_postdate, .dev_postbody  {
+        font-size: 16px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .dev_postby, .dev_postdate {
+        font-family: 'IM Fell DW Pica', serif;
+        font-style: italic;
+        -webkit-text-stroke: .1px; /* goddamnit Chrome fix your shit */
+        color: rgba(255, 255, 255, .5);
+    }
+
+    .dev_post blockquote {
+        padding: 10px;        
+        background-color: rgba(0, 0, 0, .2);
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+.content_body {    
+    background-color: rgba(0, 0, 0, .2);
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+    .content_body div {
+        padding: 15px;
+    }

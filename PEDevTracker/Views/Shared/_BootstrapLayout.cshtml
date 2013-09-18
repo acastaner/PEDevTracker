@@ -4,24 +4,39 @@
 <head>
     @Styles.Render("~/Content/bootstrap/base")
     @Styles.Render("~/Content/bootstrap/theme")
+    @Styles.Render("~/Content/css")
     @* Google Analytics code, can be placed anywhere, here is fine *@
     @{Html.RenderPartial("_GoogleAnalytics");}
+    @{Html.RenderPartial("_GoogleFonts");}
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
     <div class="container">
         <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li>@Html.ActionLink("Home", "Index", "Home")</li>
-          <li>@Html.ActionLink("Devs", "Index", "Developer")</li>
-          <li>@Html.ActionLink("About", "About", "Home")</li>
-        </ul>
-        <h3 class="text-muted">Project: Eternity Dev Tracker</h3>
+        
+        </div>
+
+      <div class="row">
+        <div class="col-md-4">
+            <div id="left-col">
+                <h1 id="title">Project Eternity</h1>
+                <h2 id="subtitle">dev tracker</h2>
+                <hr id="logo-line1"/>
+                <hr id="logo-line2"/>
+                <ul class="nav nav-pills pull-left">
+                  <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                  <li>@Html.ActionLink("Developers", "Index", "Developer")</li>
+                  <li>@Html.ActionLink("RSS", "About", "Home")</li>
+                  <li>@Html.ActionLink("About", "About", "Home")</li>
+                </ul>
+            </div>
+        </div>
+        <div id="right-col" class="col-md-8">@RenderBody()</div>
       </div>
-        <div class="row">@RenderBody()</div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/js")
 </body>
 </html>
