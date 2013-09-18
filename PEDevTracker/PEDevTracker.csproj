@@ -216,6 +216,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DeveloperController.cs" />
     <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\SyncController.cs" />
     <Compile Include="Models\HibernateModule.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -233,16 +234,17 @@
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\images\background-1280.jpg" />
+    <Content Include="Content\images\background-2560.jpg" />
     <Content Include="Content\Layout.css" />
-    <Content Include="Content\scripts\Layout.js" />
+    <Content Include="Scripts\Layout.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="Properties\PublishProfiles\pedevtracker - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\pedevtracker - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\pedevtracker.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -308,10 +310,10 @@
     <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
     <Content Include="Views\Post\View.cshtml" />
     <Content Include="Views\Shared\_GoogleFonts.cshtml" />
+    <Content Include="Views\Rss\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
