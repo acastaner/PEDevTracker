@@ -4,7 +4,7 @@
     
 }
 <h3>Latest Developer Posts</h3>
-
+@Html.Partial("_Pagination", ViewBag.Pagination as PEDevTracker.Models.Pagination)
 @foreach (PEDevTracker.Models.Post devPost in Model)
 {
     // We use a partial view that can be used in other places while retaining a consistent look
