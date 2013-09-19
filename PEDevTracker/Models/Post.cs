@@ -148,6 +148,10 @@ namespace PEDevTracker.Models
                 {
                     hour = hour + 12;
                 }
+                else
+                {
+                    hour = 0;
+                }
             }
 
             // August 21 2013 07:48 (or 19:48 if PM)
