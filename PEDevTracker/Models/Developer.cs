@@ -92,7 +92,7 @@ namespace PEDevTracker.Models
             // TODO: Also, error handling
             using (WebClient wc = new WebClient())
             {
-                wc.Headers.Add("Cookie: \"session_id=323a49c3240f5b3a1c61978cf5ebe3a5; modtids=,; member_id=43009; pass_hash=f98e8579016c508c07c0c2fd4e9ec91d; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; rteStatus=rte\"");
+                wc.Headers.Add("Cookie: member_id=43009; pass_hash=f98e8579016c508c07c0c2fd4e9ec91d; member_id=54540; pass_hash=f19af4a426127e8d98cd94efd310ea0a; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; session_id=ddfcb5dced94b001e48f76d4f88c9059");
                 content = wc.DownloadString(tabUri);
             }
 
