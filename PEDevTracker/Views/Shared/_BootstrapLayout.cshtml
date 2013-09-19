@@ -10,30 +10,25 @@
     @{Html.RenderPartial("_GoogleFonts");}
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/favicon.png"> 
 </head>
 <body>
     <div class="container">
-        <div class="header">
-        
+        <div id="left-col">
+            <h1 id="title">Project Eternity</h1>
+            <h2 id="subtitle">dev tracker</h2>
+            <hr id="logo-line1"/>
+            <hr id="logo-line2"/>
+            <ul class="nav nav-pills pull-left">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Developers", "Index", "Developer")</li>
+                <li>@Html.ActionLink("RSS", "Index", "Rss")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+            </ul>
         </div>
-
-      <div class="row">
-        <div class="col-md-4">
-            <div id="left-col">
-                <h1 id="title">Project Eternity</h1>
-                <h2 id="subtitle">dev tracker</h2>
-                <hr id="logo-line1"/>
-                <hr id="logo-line2"/>
-                <ul class="nav nav-pills pull-left">
-                  <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                  <li>@Html.ActionLink("Developers", "Index", "Developer")</li>
-                  <li>@Html.ActionLink("RSS", "Index", "Rss")</li>
-                  <li>@Html.ActionLink("About", "About", "Home")</li>
-                </ul>
-            </div>
-        </div>
-        <div id="right-col" class="col-md-8">@RenderBody()</div>
-      </div>
+        <br />
+        <br />
+        @RenderBody()
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

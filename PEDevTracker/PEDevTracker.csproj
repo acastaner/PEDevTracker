@@ -243,6 +243,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\images\background-1280.jpg" />
     <Content Include="Content\images\background-2560.jpg" />
+    <Content Include="Content\images\favicon.png" />
     <Content Include="Content\Layout.css" />
     <Content Include="Scripts\Layout.js" />
     <Content Include="favicon.ico" />
