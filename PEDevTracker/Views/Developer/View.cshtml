@@ -9,7 +9,7 @@
 <div>The profile page of @Model.DisplayName is located there: <a href="@Model.GetProfileUri().ToString()" target="_blank">@Model.GetProfileUri().ToString()</a>. 
     We retrieved a total of <b>@Model.GetPostCount().ToString() posts</b> from this person.
 </div>
-<h2>Posts</h2>
+<h3>Posts</h3>
 <div>
     @foreach (PEDevTracker.Models.Post post in posts)
     {

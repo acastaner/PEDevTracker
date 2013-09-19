@@ -111,9 +111,12 @@ hr {
     font-style: italic;
     -webkit-text-stroke: .1px; /* goddamnit Chrome fix your shit */
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     display:block;
 }
+
+    .nav li {
+    }
 
 /* Dev Post */
 
@@ -124,6 +127,10 @@ hr {
 }
 
     .dev_post div {
+    }
+
+    .dev_post p {
+        padding-bottom: 0px;
     }
 
     .dev_postby, .dev_postdate, .dev_postbody  {
@@ -148,6 +155,11 @@ hr {
         border-radius: 10px;
     }
 
+    .dev_postliner {
+        margin: 5px 15px 5px 15px;
+        opacity: 0.4;
+    }
+
 .content_body {    
     background-color: rgba(0, 0, 0, .3);
     margin-bottom: 10px;
@@ -157,3 +169,12 @@ hr {
     .content_body div {
         padding: 15px;
     }
+
+.pagination_nav {
+    text-align: center;
+    padding-bottom: 10px;    
+    font-family: 'IM Fell DW Pica', serif;
+    font-style: italic;
+    font-size: 18px;
+    -webkit-text-stroke: .1px; /* goddamnit Chrome fix your shit */
+}

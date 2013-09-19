@@ -11,3 +11,4 @@
     // This one is stored under /Views/_Shared/_DevPost.cshtml
     Html.RenderPartial("_DevPost", devPost);
 }
+@Html.Partial("_Pagination", ViewBag.Pagination as PEDevTracker.Models.Pagination)

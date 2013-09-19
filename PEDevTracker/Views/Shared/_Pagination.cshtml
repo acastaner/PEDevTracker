@@ -22,7 +22,7 @@
     var values = new RouteValueDictionary(Model.RouteValues);
     var attributes = new Dictionary<string, object>();
  }
- <nav class="pagination">
+ <nav class="pagination_nav">
     <ul class="pagination">
     @if (Model.PageNumber > 0)
     {
@@ -39,12 +39,12 @@
     {
          if (afterItem)
          {
-                <li>|</li>
+                //<li>|</li>
          }
 
         if (i == Model.PageNumber)
          {
-                <li class="pagination current">@pageNumberText</li>
+                <li class="pagination disabled"><a>@pageNumberText</a></li>
          }
         else
         {
@@ -61,7 +61,7 @@
     {
         if (afterItem)
         {
-              <li>|</li>
+              //<li>|</li>
         }
         values["page"] = Model.PageNumber + 1;
         attributes["class"] = "next";

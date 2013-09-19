@@ -4,9 +4,11 @@
         <div class="row dev_postby">
             Posted by @Html.ActionLink(Model.Author.DisplayName, "View", new{ Controller="Developer", id=Model.Author.Id}) on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
         </div>
+        <hr class="dev_postliner"/>
         <div class="row dev_postbody">
             <span class="dev-post-quote-text">@Html.Raw(Model.Content)</span>
         </div>
+        <hr class="dev_postliner"/>
         <div class="row dev_postdate">
             Retrieved on: @Model.RetrieveDate.ToShortDateString() at @Model.RetrieveDate.ToShortTimeString()
             <a href="@Model.Uri" target="_blank">Source</a> | @Html.ActionLink("Permalink", "View", new{Controller="Post", id=Model.Id})
