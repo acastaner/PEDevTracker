@@ -48,7 +48,7 @@ namespace PEDevTracker.Controllers
         {
             var s = HibernateModule.CreateSession();
             var t = s.BeginTransaction();
-List<Developer> devs = new List<Developer>();
+            List<Developer> devs = new List<Developer>();
             devs.Add(new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke"));
             devs.Add(new Developer("18301-badler", "BAdler", ""));
             devs.Add(new Developer("6-darren-monahan", "Darren Monahan", "Darren Monahan"));
@@ -56,6 +56,8 @@ List<Developer> devs = new List<Developer>();
             devs.Add(new Developer("24-je-sawyer", "J.E. Sawyer", "Joshua Eric Sawyer"));
             devs.Add(new Developer("43480-kaz", "Kaz", "Kazunori Aruga"));
             devs.Add(new Developer("51406-rob-nesler", "Rob Nesler", "Rob Nesler"));
+            devs.Add(new Developer("30529-dimitri-berman", "Dimitri Berman", "Dimitri Berman"));
+            devs.Add(new Developer("54039-polina", "Polina", "Polina Hristova"));
 
             foreach (Developer dev in devs)
             {
