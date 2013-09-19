@@ -21,6 +21,7 @@ namespace PEDevTracker.Models
         public virtual string Content { get; set; }
         public virtual Uri Uri { get; set; }
         public virtual string ContentHash { get; set; }
+        public virtual string PostTitle { get; set; }
         #endregion
         #region Constructors
         public Post()
@@ -41,6 +42,7 @@ namespace PEDevTracker.Models
             SetContentHash();
 
             var s = HibernateModule.CreateSession();
+            var t = s.BeginTransaction();
             // If the previous query returned nothing, we don't have that post yet
             // so continue parsing and save into db
             
@@ -48,14 +50,10 @@ namespace PEDevTracker.Models
             {
                 SetOriginalPostUri(postNode);
                 SetTime(postNode);
-                var f = this.Content.Length;
-                var t = s.BeginTransaction();
-                var length = this.Content.Length;
-                
+                SetTitle(postNode);
                 s.Save(this);
                 t.Commit();
             }
-
         }
 
         public virtual bool PostExists()
@@ -179,6 +177,11 @@ namespace PEDevTracker.Models
         {
             this.Content = postNode.SelectSingleNode(".//div[@class='post']").InnerHtml;
         }
+
+        private void SetTitle(HtmlNode postNode)
+        {
+            this.PostTitle = postNode.SelectSingleNode(".//h3[@class='row2']/a").InnerHtml;
+        }
         /// <summary>
         /// Sets the ContentHash value based on the Content value.
         /// Used to check for duplicates.
@@ -225,6 +228,7 @@ namespace PEDevTracker.Models
             Map(x => x.Content).Length(10000);
             Map(x => x.Uri);
             Map(x => x.ContentHash);
+            Map(x => x.PostTitle);
         }
     }
     #endregion
