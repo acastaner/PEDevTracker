@@ -109,13 +109,17 @@ namespace PEDevTracker.Models
                 IEnumerable<HtmlNode> allPosts = null;
                 allPosts = mainNode.SelectNodes("//*[@class='post_block no_sidebar']");
 
-                // Further parse each post to extract thread link, post time, etc..
-                foreach (HtmlNode postNode in allPosts)
+
+                if (allPosts != null)
                 {
-                    Post newPost = new Post();
-                    newPost.Author = this;
-                    newPost.ImportPost(postNode);
-                    devPosts.Add(newPost);
+                    // Further parse each post to extract thread link, post time, etc..
+                    foreach (HtmlNode postNode in allPosts)
+                    {
+                        Post newPost = new Post();
+                        newPost.Author = this;
+                        newPost.ImportPost(postNode);
+                        devPosts.Add(newPost);
+                    }
                 }
             }
             return devPosts;

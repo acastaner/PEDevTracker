@@ -43,6 +43,7 @@ namespace PEDevTracker.Models
             var s = HibernateModule.CreateSession();
             // If the previous query returned nothing, we don't have that post yet
             // so continue parsing and save into db
+            
             if (!this.PostExists())
             {
                 SetOriginalPostUri(postNode);
@@ -50,13 +51,11 @@ namespace PEDevTracker.Models
                 var f = this.Content.Length;
                 var t = s.BeginTransaction();
                 var length = this.Content.Length;
+                
                 s.Save(this);
                 t.Commit();
             }
-            else
-            {
-                Console.WriteLine(DateTime.Now + " Did not import this post.");
-            }
+
         }
 
         public virtual bool PostExists()
@@ -92,7 +91,14 @@ namespace PEDevTracker.Models
             postTime = postTime.Replace(",", "");
 
             this.Date = ParseObsidianTime(postTime);
-            this.RetrieveDate = DateTime.Now;            
+            try
+            {
+                this.RetrieveDate = DateTime.Now;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Couldn't parse date for this post: " + ex.Message);
+            }
 
         }
         /// <summary>
@@ -134,16 +140,29 @@ namespace PEDevTracker.Models
             int hour = Int16.Parse(hourAndMinutes[0]);
             int minutes = Int16.Parse(hourAndMinutes[1]);
 
+            // We check if we are AM or PM
+            // If PM we add 12 (to make it 24h format), but 12 PM is an exception
             if (amOrPm == "PM")
             {
-                hour = hour + 12;
+                if (hour < 12)
+                {
+                    hour = hour + 12;
+                }
             }
 
             // August 21 2013 07:48 (or 19:48 if PM)
             // which is :
             // MMMM dd yyyy H:mm
+            DateTime finalTime = new DateTime();
             string convertedDateFormat = month + " " + day + " " + year + " " + hour + ":" + minutes;
-            DateTime finalTime = DateTime.ParseExact(convertedDateFormat, "MMMM dd yyyy H:m", CultureInfo.InvariantCulture);
+            try
+            {
+                finalTime = DateTime.ParseExact(convertedDateFormat, "MMMM dd yyyy H:m", CultureInfo.InvariantCulture);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error parsing time: " + ex.Message);
+            }
 
             return finalTime;
         }

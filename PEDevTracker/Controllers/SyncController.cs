@@ -32,9 +32,9 @@ namespace PEDevTracker.Controllers
                 }
                 success = true;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception("Couldn't fetch posts from remote");
+                throw new Exception("Couldn't fetch posts from remote: " + ex.Message);
             }
             return Json(success, JsonRequestBehavior.AllowGet);
         }
