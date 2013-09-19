@@ -48,19 +48,14 @@ namespace PEDevTracker.Controllers
         {
             var s = HibernateModule.CreateSession();
             var t = s.BeginTransaction();
-
-            Developer badler = new Developer("18301-badler", "BAdler", "");
-            Developer adam = new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke");
-            Developer darren = new Developer("6-darren-monahan", "Darren Monahan", "Darren Monahan");
-            Developer sawyer = new Developer("24-je-sawyer", "J.E. Sawyer", "Joshua Eric Sawyer");
-            Developer guildmaster = new Developer("1-the-guildmaster", "The Guildmaster", "");
-
-            List<Developer> devs = new List<Developer>();
-            devs.Add(adam);
-            devs.Add(badler);
-            devs.Add(darren);
-            devs.Add(guildmaster);
-            devs.Add(sawyer);
+List<Developer> devs = new List<Developer>();
+            devs.Add(new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke"));
+            devs.Add(new Developer("18301-badler", "BAdler", ""));
+            devs.Add(new Developer("6-darren-monahan", "Darren Monahan", "Darren Monahan"));
+            devs.Add(new Developer("1-the-guildmaster", "The Guildmaster", ""));
+            devs.Add(new Developer("24-je-sawyer", "J.E. Sawyer", "Joshua Eric Sawyer"));
+            devs.Add(new Developer("43480-kaz", "Kaz", "Kazunori Aruga"));
+            devs.Add(new Developer("51406-rob-nesler", "Rob Nesler", "Rob Nesler"));
 
             foreach (Developer dev in devs)
             {
@@ -71,8 +66,7 @@ namespace PEDevTracker.Controllers
                 if (foundDev == null)
                 {
                     s.Save(dev);
-                }
-                                        
+                }                                        
             }
             t.Commit();
         }
