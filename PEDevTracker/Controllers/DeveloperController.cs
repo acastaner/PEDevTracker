@@ -17,7 +17,8 @@ namespace PEDevTracker.Controllers
             var s = HibernateModule.CreateSession();
             IList<Developer> devs = s.QueryOver<Developer>()
                                     .OrderBy(x => x.DisplayName).Asc
-                                    .List<Developer>();                              
+                                    .List<Developer>();
+            
             return View(devs);
         }
 

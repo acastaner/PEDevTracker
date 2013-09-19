@@ -1,6 +1,6 @@
 ﻿@model PEDevTracker.Models.Post
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "View post from " + Model.Author.DisplayName;
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
     bool error = false;
     
