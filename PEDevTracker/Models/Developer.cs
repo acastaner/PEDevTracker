@@ -32,14 +32,30 @@ namespace PEDevTracker.Models
 
         #endregion
         #region Methods
+        /// <summary>
+        /// Returns the URI of the developer's profile.
+        /// </summary>
+        /// <returns></returns>
         public virtual Uri GetProfileUri()
         {
             return new Uri("http://forums.obsidian.net/user/" + ProfileId + "/");
 
         }
+        /// <summary>
+        /// Returns the "Posts" tab of the developer's profile page.
+        /// </summary>
+        /// <returns></returns>
         public virtual Uri GetPostsUri()
         {
             return new Uri(GetProfileUri() + "?tab=posts");
+        }
+        /// <summary>
+        /// Returns the "Topics" tab of the developer's profile page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual Uri GetTopicsUri()
+        {
+            return new Uri(GetProfileUri() + "?tab=topics");
         }
         /// <summary>
         /// Fetches all the posts by this user from the local database (ie: not the official forums)
@@ -62,6 +78,14 @@ namespace PEDevTracker.Models
         /// <returns></returns>
         public virtual IEnumerable<Post> FetchPostsFromRemote()
         {
+            List<Post> devPosts = new List<Post>();
+            devPosts.AddRange(ParseTabContent(GetPostsUri()));
+            devPosts.AddRange(ParseTabContent(GetTopicsUri()));            
+            return devPosts;
+        }
+
+        private IEnumerable<Post> ParseTabContent(Uri tabUri)
+        {
             string content;
             // Retrieve web page
             // TODO: Not hard-coded authentication because this is ugly
@@ -69,7 +93,7 @@ namespace PEDevTracker.Models
             using (WebClient wc = new WebClient())
             {
                 wc.Headers.Add("Cookie: \"session_id=323a49c3240f5b3a1c61978cf5ebe3a5; modtids=,; member_id=43009; pass_hash=f98e8579016c508c07c0c2fd4e9ec91d; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; rteStatus=rte\"");
-                content = wc.DownloadString(GetPostsUri());
+                content = wc.DownloadString(tabUri);
             }
 
             // Save only the HTML code we are interested in
