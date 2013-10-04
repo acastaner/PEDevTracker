@@ -27,8 +27,10 @@ namespace PEDevTracker.Models
         #region Methods
         public void Init(HttpApplication context)
         {
-            context.EndRequest += new EventHandler(Application_EndRequest);
-            context.BeginRequest += new EventHandler(Application_BeginRequest);
+            //context.EndRequest += new EventHandler(Application_EndRequest);
+            //context.BeginRequest += new EventHandler(Application_BeginRequest);
+            context.PreRequestHandlerExecute += new EventHandler(Application_BeginRequest);
+            context.PostRequestHandlerExecute += new EventHandler(Application_EndRequest);
         }
         /// <summary>
         /// Called at the begining of the request. We create the session object and store it in the context.
@@ -121,6 +123,24 @@ namespace PEDevTracker.Models
         public static ISession CreateSession()
         {
             return HibernateModule.CurrentFactory.OpenSession();
+        }
+
+        /// <summary>
+        /// Returns the stored Session object
+        /// </summary>
+        public static ISession CurrentSession
+        {
+            get
+            {
+                HttpContext currentContext = HttpContext.Current;
+                ISession session = currentContext.Items[SessionContextKey] as ISession;
+                if (session == null)
+                {
+                    session = HibernateModule.CreateSession();
+                    currentContext.Items[SessionContextKey] = session;
+                }
+                return session;
+            }
         }
         /// <summary>
         /// Builds the schema 

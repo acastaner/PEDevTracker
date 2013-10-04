@@ -22,7 +22,7 @@ namespace PEDevTracker.Controllers
             bool success = false;
             try
             {
-                var s = HibernateModule.CreateSession();
+                var s = HibernateModule.CurrentSession;
                 IList<Developer> devs = s.QueryOver<Developer>()
                                         .List<Developer>();
 

@@ -20,7 +20,7 @@ namespace PEDevTracker.Controllers
 
         public RssActionResult Feed()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             var t = s.BeginTransaction();
 
             var query = s.QueryOver<Post>()

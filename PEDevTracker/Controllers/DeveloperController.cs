@@ -14,7 +14,7 @@ namespace PEDevTracker.Controllers
 
         public ActionResult Index()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             IList<Developer> devs = s.QueryOver<Developer>()
                                     .OrderBy(x => x.DisplayName).Asc
                                     .List<Developer>();
@@ -24,7 +24,7 @@ namespace PEDevTracker.Controllers
 
         public ActionResult View(int id)
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             Developer dev = new Developer();
 
             try
@@ -47,7 +47,7 @@ namespace PEDevTracker.Controllers
         /// </summary>
         public static void InitiateAccounts()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             var t = s.BeginTransaction();
             List<Developer> devs = new List<Developer>();
             devs.Add(new Developer("1444-adam-brennecke", "Adam Brennecke", "Adam Brennecke"));

@@ -41,7 +41,7 @@ namespace PEDevTracker.Models
             SetContent(postNode);
             SetContentHash();
 
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             var t = s.BeginTransaction();
             // If the previous query returned nothing, we don't have that post yet
             // so continue parsing and save into db
@@ -58,7 +58,7 @@ namespace PEDevTracker.Models
 
         public virtual bool PostExists()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             var matchingHash = s.QueryOver<Post>()
                                 .Where(x => x.ContentHash == this.ContentHash)
                                 .OrderBy(x => x.RetrieveDate).Desc

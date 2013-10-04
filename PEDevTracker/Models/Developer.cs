@@ -63,7 +63,7 @@ namespace PEDevTracker.Models
         /// <returns></returns>
         public virtual IList<Post> FetchPostsFromLocal(int amount)
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             IList<Post> posts = s.QueryOver<Post>()
                                     .Where(x => x.Author == this)
                                     .OrderBy(x => x.Date).Desc
@@ -126,7 +126,7 @@ namespace PEDevTracker.Models
         }
         public virtual int GetPostCount()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             return s.QueryOver<Post>()
                             .Where(x => x.Author == this)
                             .RowCount();

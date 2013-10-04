@@ -15,7 +15,7 @@ namespace PEDevTracker.Controllers
         public ActionResult Index(int? page)
         {
             var fluentConfig = HibernateModule.GetConfiguration();
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
 
             var request = s.QueryOver<Post>()
                             .OrderBy(x => x.Date).Desc;
