@@ -1,7 +1,7 @@
 ﻿@model PEDevTracker.Models.Post
 <div class="dev_post">
         <div class="row dev_postby">
-            Posted by @Html.ActionLink(Model.Author.DisplayName, "View", new{ Controller="Developer", id=Model.Author.Id}) on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
+            <span class="dev_posttitle">@HttpUtility.HtmlDecode(Model.PostTitle)</span><br />Posted by @Html.ActionLink(Model.Author.DisplayName, "View", new{ Controller="Developer", id=Model.Author.Id}) on @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
         </div>
         <hr class="dev_postliner"/>
         <div class="row dev_postbody">

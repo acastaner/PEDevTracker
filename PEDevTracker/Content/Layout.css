@@ -140,6 +140,12 @@ hr {
     text-align: left;
 }
 
+    .dev_posttitle {
+        font-family: 'IM Fell DW Pica', serif;
+        font-style: normal;
+        color: white;
+    }
+
     .dev_post div {
     }
 
@@ -151,7 +157,7 @@ hr {
         font-size: 16px;
         padding-left: 30px;
         padding-right: 30px;
-        padding-top: 10px;
+        padding-top: 20px;
         padding-bottom: 10px;
     }
     
