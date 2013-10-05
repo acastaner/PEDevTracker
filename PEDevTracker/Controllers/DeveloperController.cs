@@ -59,6 +59,7 @@ namespace PEDevTracker.Controllers
             devs.Add(new Developer("51406-rob-nesler", "Rob Nesler", "Rob Nesler"));
             devs.Add(new Developer("30529-dimitri-berman", "Dimitri Berman", "Dimitri Berman"));
             devs.Add(new Developer("54039-polina", "Polina", "Polina Hristova"));
+            devs.Add(new Developer("4-feargus-urquhart", "Feargus Urquhart", "Feargus Urquhart");
 
             foreach (Developer dev in devs)
             {
