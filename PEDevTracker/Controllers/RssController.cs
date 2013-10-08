@@ -33,7 +33,7 @@ namespace PEDevTracker.Controllers
             string hostName = "http://pedevtracker.azurewebsites.net";
             foreach (Post a in query)
             {
-                string url = hostName + "/Post/Details/"+ a.Id;
+                string url = hostName + "/Post/View/"+ a.Id;
                 SyndicationItem item = new SyndicationItem("Dev post by " + a.Author.DisplayName, a.Content, new Uri(url));
                 item.PublishDate = a.Date;
                 item.LastUpdatedTime = a.RetrieveDate;
