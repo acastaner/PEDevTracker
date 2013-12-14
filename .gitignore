@@ -16,6 +16,7 @@ TestResults
 *.user
 *.sln.docstates
 .nuget/
+UpgradeLog*.htm
 
 # Build results
 [Dd]ebug/
