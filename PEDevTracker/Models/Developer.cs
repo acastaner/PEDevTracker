@@ -3,6 +3,7 @@ using HtmlAgilityPack;
 using PEDevTracker.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -92,7 +93,7 @@ namespace PEDevTracker.Models
             // TODO: Also, error handling
             using (WebClient wc = new WebClient())
             {
-                wc.Headers.Add("Cookie: rteStatus=rte; member_id=54540; pass_hash=f19af4a426127e8d98cd94efd310ea0a; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; session_id=2af087b0700e12f676ea244448fbf5e4");
+                wc.Headers.Add("Cookie: rteStatus=rte; member_id="+ConfigurationManager.AppSettings.Get("memberId")+"; pass_hash="+ConfigurationManager.AppSettings.Get("passHash")+"; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; session_id="+ConfigurationManager.AppSettings.Get("sessionId")+"");
                 content = wc.DownloadString(tabUri);
             }
 
