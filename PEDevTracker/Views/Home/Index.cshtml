@@ -1,13 +1,14 @@
 ﻿@model List<PEDevTracker.Models.Post>
 @{
-    ViewBag.Title = "Project Eternity Dev Tracker";
-    
+    ViewBag.Title = "Pillars of Eternity Development Tracker";
+    ViewBag.Description = "Developer comment log for Pillars of Eternity (formerly Project Eternity), Obsidian Entertainment's new fantasy RPG, funded by Kickstarter.";
 }
-<h3>Latest Developers Posts</h3>
-
+<h3>Latest Developer Posts</h3>
+@Html.Partial("_Pagination", ViewBag.Pagination as PEDevTracker.Models.Pagination)
 @foreach (PEDevTracker.Models.Post devPost in Model)
 {
     // We use a partial view that can be used in other places while retaining a consistent look
     // This one is stored under /Views/_Shared/_DevPost.cshtml
     Html.RenderPartial("_DevPost", devPost);
 }
+@Html.Partial("_Pagination", ViewBag.Pagination as PEDevTracker.Models.Pagination)

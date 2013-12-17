@@ -1,10 +1,12 @@
 ﻿@model List<PEDevTracker.Models.Developer>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pillars of Eternity Developers";
+    ViewBag.Description = "Developer list page for Project Eternity DevTracker";    
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
 }
 
-<h2>Developers</h2>
+<h3>Developers</h3>
+<div class="content_body">
 <div>Here's the list of the developers we are tracking. Click on their name to see all of their posts. If you feel some are missing, please contact us.</div>
 <div>
     <ul>
@@ -13,4 +15,7 @@
         <li>@Html.ActionLink(dev.DisplayName, "View", new { id=dev.Id })</li>
     }
     </ul>
+</div>
+
+
 </div>

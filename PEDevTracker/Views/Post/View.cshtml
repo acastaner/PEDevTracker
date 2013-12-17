@@ -1,6 +1,6 @@
 ﻿@model PEDevTracker.Models.Post
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "View post from " + Model.Author.DisplayName;
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
     bool error = false;
     
@@ -10,7 +10,7 @@
     }
 }
 
-<h2>View post</h2>
+<h3>View Post</h3>
 @if (error)
 {
     <div class="alert-message error">

@@ -1,0 +1,71 @@
+﻿@model PEDevTracker.Models.Pagination
+@{
+    const int NumberOfPagesAround = 2;
+    long firstPageNumber = Model.PageNumber - NumberOfPagesAround;
+    long lastPageNumber = Model.PageNumber + NumberOfPagesAround;
+    if (firstPageNumber < 0)
+    {
+        lastPageNumber = 2 * NumberOfPagesAround;
+        firstPageNumber = 0;
+    }
+    if (lastPageNumber > Model.NumberOfPages - 1)
+    {
+        lastPageNumber = Model.NumberOfPages - 1;
+        firstPageNumber = lastPageNumber - NumberOfPagesAround * 2;
+        if (firstPageNumber < 0)
+        {
+            firstPageNumber = 0;
+        }
+    }
+    bool afterItem = false;
+    string pageNumberText = (Model.PageNumber + 1).ToString();
+    var values = new RouteValueDictionary(Model.RouteValues);
+    var attributes = new Dictionary<string, object>();
+ }
+ <nav class="pagination_nav">
+    <ul class="pagination">
+    @if (Model.PageNumber > 0)
+    {
+        values["page"] = Model.PageNumber - 1;
+        attributes["class"] = "prev";
+        <li class="pagination">@Html.ActionLink("Prev.", Model.Action, values, attributes)</li>
+        afterItem = true;
+    }
+    @if (firstPageNumber > 0)
+    {
+        afterItem = false;
+    }
+    @for (long i = firstPageNumber; i <= lastPageNumber; i++)
+    {
+         if (afterItem)
+         {
+                //<li>|</li>
+         }
+
+        if (i == Model.PageNumber)
+         {
+                <li class="pagination disabled"><a>@pageNumberText</a></li>
+         }
+        else
+        {
+            values["page"] = i;
+                <li class="pagination">@Html.ActionLink((i + 1).ToString(), Model.Action, values)</li>
+        }
+        afterItem = true;
+    }
+    @if (lastPageNumber < Model.NumberOfPages - 1)
+    {
+        afterItem = false;
+    }
+    @if (Model.NumberOfPages > Model.PageNumber + 1)
+    {
+        if (afterItem)
+        {
+              //<li>|</li>
+        }
+        values["page"] = Model.PageNumber + 1;
+        attributes["class"] = "next";
+        <li class="pagination">@Html.ActionLink("Next", Model.Action, values, attributes)</li>
+    }
+    </ul>
+</nav>

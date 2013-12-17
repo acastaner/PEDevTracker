@@ -3,25 +3,35 @@
 <html lang="en">
 <head>
     @Styles.Render("~/Content/bootstrap/base")
-    @Styles.Render("~/Content/bootstrap/theme")
+    @Styles.Render("~/Content/css")
     @* Google Analytics code, can be placed anywhere, here is fine *@
     @{Html.RenderPartial("_GoogleAnalytics");}
+    @{Html.RenderPartial("_GoogleFonts");}
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <meta name="description" content="@ViewBag.Description"/>
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/favicon.png">
+    <link rel="alternate" type="application/rss+xml" title="Project Eternity Development Tracker RSS Feed" href="@Url.Action("Feed", "Rss")" />
 </head>
 <body>
     <div class="container">
-        <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li>@Html.ActionLink("Home", "Index", "Home")</li>
-          <li>@Html.ActionLink("Devs", "Index", "Developer")</li>
-          <li>@Html.ActionLink("About", "About", "Home")</li>
-        </ul>
-        <h3 class="text-muted">Project: Eternity Dev Tracker</h3>
-      </div>
-        <div class="row">@RenderBody()</div>
+        <div id="left-col">
+            <h1 id="title">Pillars of Eternity</h1>
+            <h2 id="subtitle">dev tracker</h2>
+            <hr id="logo-line1"/>
+            <hr id="logo-line2"/>
+            <ul class="nav nav-pills pull-left">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Developers", "Index", "Developer")</li>
+                <li>@Html.ActionLink("RSS", "Index", "Rss")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+            </ul>
+        </div>
+        <br />
+        <br />
+        @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    @Scripts.Render("~/bundles/js")
 </body>
 </html>

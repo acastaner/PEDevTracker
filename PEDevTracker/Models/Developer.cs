@@ -3,6 +3,7 @@ using HtmlAgilityPack;
 using PEDevTracker.Controllers;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -32,14 +33,30 @@ namespace PEDevTracker.Models
 
         #endregion
         #region Methods
+        /// <summary>
+        /// Returns the URI of the developer's profile.
+        /// </summary>
+        /// <returns></returns>
         public virtual Uri GetProfileUri()
         {
             return new Uri("http://forums.obsidian.net/user/" + ProfileId + "/");
 
         }
+        /// <summary>
+        /// Returns the "Posts" tab of the developer's profile page.
+        /// </summary>
+        /// <returns></returns>
         public virtual Uri GetPostsUri()
         {
             return new Uri(GetProfileUri() + "?tab=posts");
+        }
+        /// <summary>
+        /// Returns the "Topics" tab of the developer's profile page.
+        /// </summary>
+        /// <returns></returns>
+        public virtual Uri GetTopicsUri()
+        {
+            return new Uri(GetProfileUri() + "?tab=topics");
         }
         /// <summary>
         /// Fetches all the posts by this user from the local database (ie: not the official forums)
@@ -47,7 +64,7 @@ namespace PEDevTracker.Models
         /// <returns></returns>
         public virtual IList<Post> FetchPostsFromLocal(int amount)
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             IList<Post> posts = s.QueryOver<Post>()
                                     .Where(x => x.Author == this)
                                     .OrderBy(x => x.Date).Desc
@@ -62,14 +79,22 @@ namespace PEDevTracker.Models
         /// <returns></returns>
         public virtual IEnumerable<Post> FetchPostsFromRemote()
         {
+            List<Post> devPosts = new List<Post>();
+            devPosts.AddRange(ParseTabContent(GetPostsUri()));
+            devPosts.AddRange(ParseTabContent(GetTopicsUri()));            
+            return devPosts;
+        }
+
+        private IEnumerable<Post> ParseTabContent(Uri tabUri)
+        {
             string content;
             // Retrieve web page
             // TODO: Not hard-coded authentication because this is ugly
             // TODO: Also, error handling
             using (WebClient wc = new WebClient())
             {
-                wc.Headers.Add("Cookie: \"session_id=323a49c3240f5b3a1c61978cf5ebe3a5; modtids=,; member_id=43009; pass_hash=f98e8579016c508c07c0c2fd4e9ec91d; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; rteStatus=rte\"");
-                content = wc.DownloadString(GetPostsUri());
+                wc.Headers.Add("Cookie: rteStatus=rte; member_id="+ConfigurationManager.AppSettings.Get("memberId")+"; pass_hash="+ConfigurationManager.AppSettings.Get("passHash")+"; ipsconnect_5ba0915b63128c11858535d880db7be6=1; coppa=0; session_id="+ConfigurationManager.AppSettings.Get("sessionId")+"");
+                content = wc.DownloadString(tabUri);
             }
 
             // Save only the HTML code we are interested in
@@ -85,20 +110,24 @@ namespace PEDevTracker.Models
                 IEnumerable<HtmlNode> allPosts = null;
                 allPosts = mainNode.SelectNodes("//*[@class='post_block no_sidebar']");
 
-                // Further parse each post to extract thread link, post time, etc..
-                foreach (HtmlNode postNode in allPosts)
+
+                if (allPosts != null)
                 {
-                    Post newPost = new Post();
-                    newPost.Author = this;
-                    newPost.ImportPost(postNode);
-                    devPosts.Add(newPost);
+                    // Further parse each post to extract thread link, post time, etc..
+                    foreach (HtmlNode postNode in allPosts)
+                    {
+                        Post newPost = new Post();
+                        newPost.Author = this;
+                        newPost.ImportPost(postNode);
+                        devPosts.Add(newPost);
+                    }
                 }
             }
             return devPosts;
         }
         public virtual int GetPostCount()
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             return s.QueryOver<Post>()
                             .Where(x => x.Author == this)
                             .RowCount();

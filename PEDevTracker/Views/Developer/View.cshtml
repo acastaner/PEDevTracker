@@ -1,15 +1,15 @@
 ﻿@model PEDevTracker.Models.Developer
 @{
-    ViewBag.Title = "View " + Model.DisplayName + " profile";
+    ViewBag.Title = "Viewing " + Model.DisplayName + " profile";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
     IList<PEDevTracker.Models.Post> posts = Model.FetchPostsFromLocal(50);
 }
 
-<h2>@Model.DisplayName</h2>
-<div>The profile page of @Model.DisplayName is located there: <a href="@Model.GetProfileUri().ToString()" target="_blank">@Model.GetProfileUri().ToString()</a>. 
+<h3>@Model.DisplayName</h3>
+<div>The profile page of @Model.DisplayName is located <a href="@Model.GetProfileUri().ToString()" target="_blank">here</a>. 
     We retrieved a total of <b>@Model.GetPostCount().ToString() posts</b> from this person.
 </div>
-<h2>Posts</h2>
+<h3>Posts</h3>
 <div>
     @foreach (PEDevTracker.Models.Post post in posts)
     {

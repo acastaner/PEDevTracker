@@ -19,7 +19,7 @@ namespace PEDevTracker.Controllers
 
         public ActionResult View(int id)
         {
-            var s = HibernateModule.CreateSession();
+            var s = HibernateModule.CurrentSession;
             Post post = new Post();
 
             try
