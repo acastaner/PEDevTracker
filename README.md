@@ -4,7 +4,9 @@ PEDevTracker
 Introduction
 -------------
 
-An ASP.NET MVC4 / C# developer tracker for Pillars of Eternity. 
+An ASP.NET MVC4 / C# developer tracker for Pillars of Eternity.
+
+http://pedevtracker.azurewebsites.net/
 
 The goal of this project is to provide a clear, easy to use and centralized location to monitor Obsidian's developers posts on the official boards.
 I made it open source so people willing to add extra sources can do it. This is hosted on Windows Azure (free subscription) so there is no advertisement or anything.
