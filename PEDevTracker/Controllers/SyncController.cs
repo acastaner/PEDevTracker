@@ -9,17 +9,16 @@ namespace PEDevTracker.Controllers
 {
     public class SyncController : Controller
     {
-        private static DateTime? _LastSyncTime = DateTime.Now.AddMinutes(-11);
+        private static DateTime _LastSyncTimeAttempt = DateTime.Now.AddMinutes(-11);
+        private static DateTime _LastSuccessfulSyncTime;
 
         // GET: /sync/all
         public object All()
         {
             bool success = false;
             
-            // If the last sync time is null (ie: website just started) we init the variable as -11 minutes, so it'll trigger a sync
-            
-            // People are so playful, we make sure they can't trigger the update more than once/9.5 min
-            if (TimeSinceLastSync() >= 9.5)
+            // People are so playful, we make sure they can't trigger the update more than once/9 min
+            if (TimeSinceLastSync() >= 9)
             {
                 try
                 {
@@ -31,18 +30,21 @@ namespace PEDevTracker.Controllers
                     {
                         dev.FetchPostsFromRemote();
                     }
-                    success = true;                    
+                    success = true;
+                    _LastSuccessfulSyncTime = DateTime.Now;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    throw new Exception("Couldn't fetch posts from remote: " + ex.Message);
-                }
-                finally
-                {
-                    _LastSyncTime = DateTime.Now;
-                }
-            }            
+                    success = false;
+                }                
+            }
+            _LastSyncTimeAttempt = DateTime.Now;
             return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        public object LastSync()
+        {
+            return Json("Last succesfull sync: " + _LastSuccessfulSyncTime + " ; Last sync attempt: " + _LastSyncTimeAttempt, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// Will return the time of the last attempted sync (successful or not).
@@ -50,10 +52,10 @@ namespace PEDevTracker.Controllers
         /// This feels rather safe, but not sure about the performance.
         /// </summary>
         /// <returns></returns>
-        private static double TimeSinceLastSync()
+        private static int TimeSinceLastSync()
         {
-            TimeSpan diff = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second) - new TimeSpan(_LastSyncTime.Value.Hour, _LastSyncTime.Value.Minute, _LastSyncTime.Value.Second);
-            return diff.TotalMinutes;
+            TimeSpan diff = DateTime.Now - _LastSyncTimeAttempt;
+            return (int)diff.TotalMinutes;
         }
 
     }
