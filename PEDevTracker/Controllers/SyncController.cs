@@ -17,9 +17,7 @@ namespace PEDevTracker.Controllers
         {
             bool success = false;
             
-            // If the last sync time is null (ie: website just started) we init the variable as -11 minutes, so it'll trigger a sync
-            
-            // People are so playful, we make sure they can't trigger the update more than once/9.5 min
+            // People are so playful, we make sure they can't trigger the update more than once/9 min
             if (TimeSinceLastSync() >= 9)
             {
                 try
@@ -35,9 +33,9 @@ namespace PEDevTracker.Controllers
                     success = true;
                     _LastSuccessfulSyncTime = DateTime.Now;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    throw new Exception("Couldn't fetch posts from remote: " + ex.Message);
+                    success = false;
                 }                
             }
             _LastSyncTimeAttempt = DateTime.Now;
@@ -46,7 +44,7 @@ namespace PEDevTracker.Controllers
 
         public object LastSync()
         {
-            return Json((string)"Last succesfull sync: " + _LastSuccessfulSyncTime + " ; Last sync attempt: " + _LastSyncTimeAttempt, JsonRequestBehavior.AllowGet);
+            return Json("Last succesfull sync: " + _LastSuccessfulSyncTime + " ; Last sync attempt: " + _LastSyncTimeAttempt, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// Will return the time of the last attempted sync (successful or not).
