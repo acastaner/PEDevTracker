@@ -116,10 +116,15 @@ namespace PEDevTracker.Models
                     // Further parse each post to extract thread link, post time, etc..
                     foreach (HtmlNode postNode in allPosts)
                     {
-                        Post newPost = new Post();
-                        newPost.Author = this;
+                        var uri = Post.GetUriFromHtmlNode(postNode);
+                        Post newPost = Post.PostExists(uri, this);
+                        if (newPost == null)
+                        {
+                            newPost = new Post();
+                            newPost.Author = this;
+                        }                        
                         newPost.ImportPost(postNode);
-                        devPosts.Add(newPost);
+                        devPosts.Add(newPost);                        
                     }
                 }
             }

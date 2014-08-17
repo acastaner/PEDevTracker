@@ -16,9 +16,10 @@ namespace PEDevTracker.Controllers
         public object All()
         {
             bool success = false;
+            bool isLocal = Request.IsLocal;
             
             // People are so playful, we make sure they can't trigger the update more than once/9 min
-            if (TimeSinceLastSync() >= 9)
+            if (TimeSinceLastSync() >= 9 || isLocal)
             {
                 try
                 {

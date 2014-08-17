@@ -40,32 +40,41 @@ namespace PEDevTracker.Models
             // First we parse the content, and check if we already have that post
             SetContent(postNode);
             SetContentHash();
-
+            
             var s = HibernateModule.CurrentSession;
             var t = s.BeginTransaction();
-            // If the previous query returned nothing, we don't have that post yet
-            // so continue parsing and save into db
             
-            if (!this.PostExists())
+            SetOriginalPostUri(postNode);
+
+            // Check if we already have a post in Db with that content            
+            if (!SameContent())
             {
-                SetOriginalPostUri(postNode);
                 SetTime(postNode);
                 SetTitle(postNode);
-                s.Save(this);
+                s.SaveOrUpdate(this);
                 t.Commit();
             }
+            t.Dispose();
         }
 
-        public virtual bool PostExists()
+        private bool SameContent()
         {
             var s = HibernateModule.CurrentSession;
-            var matchingHash = s.QueryOver<Post>()
-                                .Where(x => x.ContentHash == this.ContentHash)
-                                .OrderBy(x => x.RetrieveDate).Desc
-                                .SingleOrDefault<Post>();
+            Post oldPost = s.Get<Post>(Id);
+            if (oldPost == null)
+                return false;
+            return oldPost.ContentHash == ContentHash ? true : false;                            
+        }
 
-            bool exists = (matchingHash == null) ? false : true;
-            return exists;
+        public static Post PostExists(Uri uri, Developer author)
+        {
+            var s = HibernateModule.CurrentSession;
+            var matchingUriPost = s.QueryOver<Post>()
+                                .Where(x => x.Uri == uri && x.Author == author)
+                                .Take(1)
+                                .SingleOrDefault<Post>();
+            bool exists = (matchingUriPost == null) ? false : true;
+            return matchingUriPost;
         }
 
         /// <summary>
@@ -75,6 +84,11 @@ namespace PEDevTracker.Models
         private void SetOriginalPostUri(HtmlNode postNode)
         {
             this.Uri = new Uri(postNode.SelectSingleNode(".//a").Attributes[0].Value);
+        }
+
+        public static Uri GetUriFromHtmlNode(HtmlNode postNode)
+        {
+            return new Uri(postNode.SelectSingleNode(".//a").Attributes[0].Value);
         }
 
         /// <summary>
